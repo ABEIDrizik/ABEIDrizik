@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework> <!-- Or a .NET version like net8.0 if preferred and compatible -->
+    <RootNamespace>SprdFlashTool.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Chipset.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="DeviceConnection.cs" />
+    <Compile Include="FlashProcess.cs" />
+    <Compile Include="IFlashUI.cs" />
+    <Compile Include="Protocol/CrcUtils.cs" />
+    <Compile Include="Comm/IUsbCommunicator.cs" />
+  </ItemGroup>
+
+</Project>
