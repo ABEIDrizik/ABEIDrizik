@@ -2,6 +2,8 @@ using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
+using LibUsbDotNet;
+using LibUsbDotNet.Main;
 
 namespace MTKDeviceManager
 {
@@ -9,6 +11,7 @@ namespace MTKDeviceManager
     {
         private readonly BackgroundWorker worker = new BackgroundWorker();
         private RichTextBox logTextBox;
+        public static UsbDeviceNotifier UsbDeviceNotifier = new UsbDeviceNotifier();
 
         public DeviceManager(RichTextBox logTextBox)
         {
@@ -16,6 +19,18 @@ namespace MTKDeviceManager
             worker.WorkerReportsProgress = true;
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
+            UsbDeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
+        }
+
+        private void OnDeviceNotifyEvent(object sender, DeviceNotifyEventArgs e)
+        {
+            // A MediaTek device in Preloader/BROM mode has VID 0x0E8D and PID 0x0003.
+            if (e.Device.IdVendor == 0x0E8D && e.Device.IdProduct == 0x0003)
+            {
+                logTextBox.Invoke((MethodInvoker)delegate {
+                    logTextBox.AppendText($"Device event: {e.EventType}, Device: {e.Device.FullName}" + Environment.NewLine);
+                });
+            }
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -29,10 +44,19 @@ namespace MTKDeviceManager
             var device = new MTKDevice();
 
             worker.ReportProgress(0, "Waiting for device...");
-            // In a real application, we would wait for a device to be connected.
-            // For this example, we'll just simulate a delay.
-            Thread.Sleep(2000);
-            worker.ReportProgress(0, "Device connected: Mediatek Android USB (COM20)");
+
+            // The actual device detection is now handled by the OnDeviceNotifyEvent.
+            // We can use an event to signal when a device is connected.
+            // For this example, we will assume the device is connected and proceed.
+
+            UsbRegistry usbRegistry = UsbDevice.AllDevices.FirstOrDefault(d => d.Vid == 0x0E8D && d.Pid == 0x0003);
+            if (usbRegistry == null)
+            {
+                e.Result = "No MTK device in BROM mode found.";
+                return;
+            }
+
+            worker.ReportProgress(0, $"Device found: {usbRegistry.FullName}");
 
             if (device.ConnectBrom())
             {

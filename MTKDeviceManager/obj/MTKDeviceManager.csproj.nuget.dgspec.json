@@ -17,14 +17,14 @@
           "/home/jules/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "netstandard2.0"
+          "net471"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
+          "net471": {
+            "targetAlias": "net471",
             "projectReferences": {}
           }
         },
@@ -40,27 +40,20 @@
         }
       },
       "frameworks": {
-        "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
+        "net471": {
+          "targetAlias": "net471",
           "dependencies": {
-            "NETStandard.Library": {
+            "LibUsbDotNet": {
+              "target": "Package",
+              "version": "[2.2.75, )"
+            },
+            "Microsoft.NETFramework.ReferenceAssemblies": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.0.3, )",
+              "version": "[1.0.3, )",
               "autoReferenced": true
             }
           },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
           "runtimeIdentifierGraphPath": "/home/jules/.dotnet/sdk/8.0.412/RuntimeIdentifierGraph.json"
         }
       }

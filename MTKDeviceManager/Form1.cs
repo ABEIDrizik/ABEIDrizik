@@ -33,11 +33,19 @@ namespace MTKDeviceManager
         {
             if (e.Error != null)
             {
-                MessageBox.Show("An error occurred: " + e.Error.Message);
+                MessageBox.Show("An error occurred: " + e.Error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show("Operation completed: " + e.Result.ToString());
+                if (e.Result is bool boolResult)
+                {
+                    string message = boolResult ? "Operation completed successfully." : "Operation failed.";
+                    MessageBox.Show(message, "Result", MessageBoxButtons.OK, boolResult ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Operation completed: " + e.Result.ToString(), "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
     }

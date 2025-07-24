@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "PKFmXQI51wU=",
+  "dgSpecHash": "XTBmZYYcFCQ=",
   "success": true,
   "projectFilePath": "/app/MTKDeviceManager/MTKDeviceManager.csproj",
   "expectedPackageFiles": [
-    "/home/jules/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "/home/jules/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512"
+    "/home/jules/.nuget/packages/libusbdotnet/2.2.75/libusbdotnet.2.2.75.nupkg.sha512",
+    "/home/jules/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.3/microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "/home/jules/.nuget/packages/microsoft.netframework.referenceassemblies.net471/1.0.3/microsoft.netframework.referenceassemblies.net471.1.0.3.nupkg.sha512"
   ],
   "logs": []
 }
